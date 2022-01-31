@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import React from 'react';
+import ProfileScreen from './src/screens/profile.screen';
+import { ThemeProvider } from "styled-components/native";
+import { theme } from "./src/infrastructure/theme/index";
+import {
+  useFonts,
+  KumbhSans_400Regular,
+  KumbhSans_700Bold,
+} from '@expo-google-fonts/kumbh-sans';
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    KumbhSans_400Regular,
+    KumbhSans_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+    <ThemeProvider theme ={theme}>
+      <ProfileScreen />
+    </ThemeProvider>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
